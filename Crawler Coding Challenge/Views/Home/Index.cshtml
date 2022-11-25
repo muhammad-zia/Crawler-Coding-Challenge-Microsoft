@@ -1,0 +1,69 @@
+﻿@model List<Crawler_Coding_Challenge.ViewModels.HomeVM>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Crawler Coding Challenge</h1>
+</div>
+
+<div class="text-center">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <label>Max Entries</label>
+            <input id="entries" value="10" />
+        </div>
+
+        <div class="col-md-7">
+            <label>Exculded From search (comma seperated)</label>
+            <input id="exculded" />
+        </div>
+
+        <div class="col-md-2">
+            <button onclick="Filter()">Search</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content">
+    <div class="align-content-center">
+        <table class="table table-primary table-bordered table-light">
+            <thead class="alert-heading">
+                <tr>
+                    <td>Word</td>
+                    <td>Count</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Words</td>
+                        <td>@item.WordsCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function Filter() {
+        var entries = $("#entries").val();
+        var exculded = $("#exculded").val();
+        var link = window.location.origin + `/Home/index?maxCount=${entries}&WordToExclude=${exculded}`;
+
+       $("#entries").val("");
+       $("#exculded").val("");
+
+        debugger;
+        window.location.href = link;
+
+    }
+</script>
